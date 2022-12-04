@@ -10,6 +10,7 @@ interface WeatherContract{
 
     interface View{
         fun showWeather(weatherResponse: WeatherResponse)
+
     }
     interface Presenter: BasePresenterBinding<View>{
         fun getWeather()

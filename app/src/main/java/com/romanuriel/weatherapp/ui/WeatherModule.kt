@@ -11,17 +11,17 @@ import dagger.hilt.android.scopes.ActivityScoped
 import dagger.hilt.android.scopes.FragmentScoped
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(FragmentComponent::class)
 class WeatherModule {
 
-    @ActivityScoped
+    @FragmentScoped
     @Provides
     fun provedesWeatherModel(
         apiService: ApiService
     ): WeatherContract.Model{
         return WeatherModel(apiService)
     }
-    @ActivityScoped
+    @FragmentScoped
     @Provides
     fun provedesWeatherPrecenter(model: WeatherContract.Model):WeatherContract.Presenter{
         return WeatherPresenter(model)
