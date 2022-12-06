@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_vertical_default">8sp</dimen>
+    <dimen name="width_card_main">100sp</dimen>
 </resources>

@@ -6,7 +6,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".ui.mainweather.MainFragmentWeather"
     android:background="@color/color_primary">
 
@@ -25,10 +24,22 @@
         android:id="@+id/icon_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:src="@tools:sample/avatars"
+        android:src="@drawable/wi_cloud"
         app:layout_constraintTop_toBottomOf="@+id/txt_dete"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_message"/>
+
+    <Button
+        android:id="@+id/button_select_degrees"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/degrees_txt"
+        android:textColor="@color/color_sedundary_gradient"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon_weather"
         app:layout_constraintBottom_toTopOf="@+id/tv_message"/>
 
 
@@ -84,7 +95,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_temp_min"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/width_card_main"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/margin_vertical_default"
         android:background="@drawable/border_iem_main"
@@ -143,11 +154,20 @@
             app:layout_constraintStart_toEndOf="@+id/tv_grade_temp"
             app:layout_constraintTop_toTopOf="@+id/tv_grade_temp" />
 
+        <ImageView
+            android:id="@+id/imagen_icon_temp_min"
+            android:src="@drawable/wi_direction_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/txt_grade_type"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_grade_type"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_temp_max"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/width_card_main"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/margin_vertical_default"
         android:background="@drawable/border_iem_main"
@@ -206,11 +226,20 @@
             app:layout_constraintStart_toEndOf="@+id/tv_grade_temp_max"
             app:layout_constraintTop_toTopOf="@+id/tv_grade_temp_max" />
 
+        <ImageView
+            android:id="@+id/image_icon_temp_max"
+            android:src="@drawable/wi_direction_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/txt_grade_type_max"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_grade_type_max"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_humi"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/width_card_main"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/margin_vertical_default"
         android:background="@drawable/border_iem_main"
@@ -249,32 +278,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_humi" />
 
-        <TextView
-            android:id="@+id/tv_grade_humi"
+        <ImageView
+            android:id="@+id/image_icon_humidity"
+            android:src="@drawable/wi_humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/indicate_temp"
-            android:textColor="@color/color_sedundary_gradient"
+            app:layout_constraintTop_toTopOf="@+id/txt_humi"
             app:layout_constraintBottom_toBottomOf="@+id/txt_humi"
-            app:layout_constraintStart_toEndOf="@+id/txt_humi"
-            app:layout_constraintTop_toTopOf="@+id/txt_humi" />
-
-        <TextView
-            android:id="@+id/txt_grade_type_humi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/grade_type"
-            android:textColor="@color/color_sedundary_gradient"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_grade_humi"
-            app:layout_constraintStart_toEndOf="@+id/tv_grade_humi"
-            app:layout_constraintTop_toTopOf="@+id/tv_grade_humi" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!--Fila secund-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_feels_like"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/width_card_main"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/margin_vertical_default"
         android:background="@drawable/border_iem_main"
@@ -333,11 +351,20 @@
             app:layout_constraintStart_toEndOf="@+id/tv_grade_feels_like"
             app:layout_constraintTop_toTopOf="@+id/tv_grade_feels_like" />
 
+        <ImageView
+            android:id="@+id/image_icon_feels_like"
+            android:src="@drawable/wi_thermometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/txt_grade_type_feels_like"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_grade_type_feels_like"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_grnd_level"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/width_card_main"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/margin_vertical_default"
         android:background="@drawable/border_iem_main"
@@ -400,7 +427,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_pressure"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/width_card_main"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/margin_vertical_default"
         android:background="@drawable/border_iem_main"
@@ -439,25 +466,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_pressure" />
 
-        <TextView
-            android:id="@+id/tv_grade_pressure"
+        <ImageView
+            android:id="@+id/image_icon_pressure"
+            android:src="@drawable/wi_pressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/indicate_temp"
-            android:textColor="@color/color_sedundary_gradient"
+            app:layout_constraintTop_toTopOf="@+id/txt_pressure"
             app:layout_constraintBottom_toBottomOf="@+id/txt_pressure"
-            app:layout_constraintStart_toEndOf="@+id/txt_pressure"
-            app:layout_constraintTop_toTopOf="@+id/txt_pressure" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-        <TextView
-            android:id="@+id/txt_grade_type_pressure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/grade_type"
-            android:textColor="@color/color_sedundary_gradient"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_grade_pressure"
-            app:layout_constraintStart_toEndOf="@+id/tv_grade_pressure"
-            app:layout_constraintTop_toTopOf="@+id/tv_grade_pressure" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -13,4 +13,7 @@
     <string name="feels_like">Feels like</string>
     <string name="grnd_level">grnd leve</string>
     <string name="pressure">Pressure</string>
+    <string name="degrees_txt">Degrees</string>
+    <string name="text_celsius">Celsius</string>
+    <string name="text_fahrenheit">Fahrenheit</string>
 </resources>

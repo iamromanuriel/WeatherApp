@@ -3,6 +3,7 @@ package com.romanuriel.weatherapp.ui.mainweather
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.romanuriel.weatherapp.R
 import com.romanuriel.weatherapp.data.model.WeatherResponse
@@ -27,6 +28,14 @@ class MainFragmentWeather: BaseFragmentBinding<FragmentMainWeatherBinding>(),Wea
         super.onViewCreated(view, savedInstanceState)
         weatherPresenter.onViewAttached(this)
         weatherPresenter.getWeather()
+        weatherPresenter.getuiStringTest()
+        showDialogOptiondegree()
+    }
+
+
+    override fun onDestroy() {
+        weatherPresenter.onViewDetach()
+        super.onDestroy()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -49,6 +58,14 @@ class MainFragmentWeather: BaseFragmentBinding<FragmentMainWeatherBinding>(),Wea
         binding.txtFeelsLike.text = weatherResponse.main.feels_like.toString()
         binding.txtTxmpGrndLevel.text = weatherResponse.main.grnd_level.toString()
         binding.txtPressure.text = weatherResponse.main.pressure.toString()
+
+
+    }
+
+    private fun showDialogOptiondegree() {
+        binding.buttonSelectDegrees.setOnClickListener {
+            DialogFragmentOptionDegrees().show(childFragmentManager, DialogFragmentOptionDegrees::class.java.simpleName)
+        }
     }
 
 
