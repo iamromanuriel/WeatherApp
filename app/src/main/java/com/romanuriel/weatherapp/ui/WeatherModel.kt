@@ -10,7 +10,7 @@ import io.reactivex.subjects.PublishSubject
 
 class WeatherModel(val apiService: ApiService):WeatherContract.Model {
 
-    val publishsubjectweather = PublishSubject.create<String>()
+    private val  publishSubjectType = PublishSubject.create<Double>()
 
 
 
@@ -18,8 +18,11 @@ class WeatherModel(val apiService: ApiService):WeatherContract.Model {
         return apiService.getWeatherResponse()
     }
 
-    override fun getStringTest(): Observable<String> {
-        publishsubjectweather.onNext("elemento1")
-        return publishsubjectweather
+    override fun setSelectDegrees(type: Double) {
+        publishSubjectType.onNext(type)
+    }
+
+    override fun  getSelectDegrees(): PublishSubject<Double> {
+        return publishSubjectType
     }
 }

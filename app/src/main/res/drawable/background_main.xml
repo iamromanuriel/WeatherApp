@@ -5,8 +5,7 @@
         android:angle="5"
         android:centerX="7.2"
         android:centerY="12.4"
-        android:centerColor="@color/purple_200"
-        android:endColor="@color/color_sedundary_gradient"
+        android:centerColor="@color/grad_sky2_first"
         android:gradientRadius="@dimen/cardview_default_elevation"
-        android:startColor="@color/purple_700" />
+        android:startColor="@color/grad_sky2_second" />
 </shape>

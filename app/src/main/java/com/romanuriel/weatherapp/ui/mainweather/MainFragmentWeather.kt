@@ -11,6 +11,9 @@ import com.romanuriel.weatherapp.databinding.FragmentMainWeatherBinding
 import com.romanuriel.weatherapp.ui.BaseFragmentBinding
 import com.romanuriel.weatherapp.ui.WeatherContract
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
@@ -28,7 +31,6 @@ class MainFragmentWeather: BaseFragmentBinding<FragmentMainWeatherBinding>(),Wea
         super.onViewCreated(view, savedInstanceState)
         weatherPresenter.onViewAttached(this)
         weatherPresenter.getWeather()
-        weatherPresenter.getuiStringTest()
         showDialogOptiondegree()
     }
 
@@ -67,7 +69,4 @@ class MainFragmentWeather: BaseFragmentBinding<FragmentMainWeatherBinding>(),Wea
             DialogFragmentOptionDegrees().show(childFragmentManager, DialogFragmentOptionDegrees::class.java.simpleName)
         }
     }
-
-
-
 }

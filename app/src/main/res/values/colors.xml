@@ -12,4 +12,16 @@
     <color name="color_secundary">#4874E2</color>
     <color name="color_primary_gradient">#FFFFFF</color>
     <color name="color_sedundary_gradient">#E9EEFA</color>
+
+    <color name="grad_card">#2FFFFFFF</color>
+
+    <!--Color sky 1-->
+    <color name="grad_sky1_first">#2F89FF</color>
+    <color name="grad_sky1_second">#AAB2FD</color>
+    <!--Color sky 2-->
+    <color name="grad_sky2_first">#FBE6C7</color>
+    <color name="grad_sky2_second">#8B96FF</color>
+    <!--Color sky 3-->
+    <color name="grad_sky3_first">#AAB2FD</color>
+    <color name="grad_sky3_second">#AAB2FD</color>
 </resources>

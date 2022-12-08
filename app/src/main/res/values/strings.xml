@@ -16,4 +16,11 @@
     <string name="degrees_txt">Degrees</string>
     <string name="text_celsius">Celsius</string>
     <string name="text_fahrenheit">Fahrenheit</string>
+    <string name="example_title_weather">weather</string>
+
+    <string-array name="string_array_type">
+        <item>Celsius</item>
+        <item>Kelvin</item>
+        <item>Farenheite</item>
+    </string-array>
 </resources>

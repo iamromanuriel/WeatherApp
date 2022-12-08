@@ -30,17 +30,11 @@ class WeatherPresenter(val model: WeatherContract.Model): WeatherContract.Presen
         )
     }
 
-    override fun getuiStringTest() {
-        disposable.add(
-            model.getStringTest().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe({
-                    println("Elementos de lista $it")
-                },{
-                    println(it.message)
-                })
-        )
-    }
 
+    override fun getOptionDegrees(type: Double) {
+
+
+    }
 
 
 }

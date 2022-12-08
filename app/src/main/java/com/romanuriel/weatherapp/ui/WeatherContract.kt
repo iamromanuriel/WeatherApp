@@ -2,6 +2,8 @@ package com.romanuriel.weatherapp.ui
 
 import com.romanuriel.weatherapp.data.model.WeatherResponse
 import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.ReplaySubject
 
 interface WeatherContract{
     interface BasePresenterBinding<T>{
@@ -11,14 +13,16 @@ interface WeatherContract{
 
     interface View{
         fun showWeather(weatherResponse: WeatherResponse)
+
     }
     interface Presenter: BasePresenterBinding<View>{
         fun getWeather()
-        fun getuiStringTest()
+        fun getOptionDegrees(type:Double)
     }
     interface Model{
         fun getWeatherResponse(): Observable<WeatherResponse>
-        fun getStringTest(): Observable<String>
+        fun getSelectDegrees(): PublishSubject<Double>
+        fun setSelectDegrees(type: Double)
     }
 
 }
