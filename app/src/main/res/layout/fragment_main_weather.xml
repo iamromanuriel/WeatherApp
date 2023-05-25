@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.mainweather.MainFragmentWeather"
-    android:background="@drawable/background_main">
+    android:background="@color/grad_sky1_first">
 
     <TextView
         android:id="@+id/txt_dete"
@@ -490,5 +490,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

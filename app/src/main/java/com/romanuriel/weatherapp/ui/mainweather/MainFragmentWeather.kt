@@ -3,17 +3,13 @@ package com.romanuriel.weatherapp.ui.mainweather
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.romanuriel.weatherapp.R
-import com.romanuriel.weatherapp.data.model.WeatherResponse
+import com.romanuriel.weatherapp.data.api.results.WeatherResponse
 import com.romanuriel.weatherapp.databinding.FragmentMainWeatherBinding
 import com.romanuriel.weatherapp.ui.BaseFragmentBinding
 import com.romanuriel.weatherapp.ui.WeatherContract
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.PublishSubject
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
@@ -21,22 +17,23 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainFragmentWeather: BaseFragmentBinding<FragmentMainWeatherBinding>(),WeatherContract.View {
     @Inject
-    lateinit var weatherPresenter: WeatherContract.Presenter
+    lateinit var presenter: WeatherContract.Presenter
 
     override fun layout(): Int {
         return R.layout.fragment_main_weather
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        weatherPresenter.onViewAttached(this)
-        weatherPresenter.getWeather()
+
+    override fun initComponent(view: View, savedInstanceState: Bundle?) {
+        presenter.onViewAttached(this)
+        //weatherPresenter.getWeather()
+        //weatherPresenter.getWeatherWithObserver()
+        presenter.getWeatherWithSingle()
         showDialogOptiondegree()
     }
 
-
     override fun onDestroy() {
-        weatherPresenter.onViewDetach()
+        presenter.onViewDetach()
         super.onDestroy()
     }
 
@@ -62,6 +59,14 @@ class MainFragmentWeather: BaseFragmentBinding<FragmentMainWeatherBinding>(),Wea
         binding.txtPressure.text = weatherResponse.main.pressure.toString()
 
 
+    }
+
+    override fun showProgressBar(value: Boolean) {
+        showComponentProgressBar(value)
+    }
+
+    override fun showMessage(msg: Any) {
+        showMessageWithToast(msg)
     }
 
     private fun showDialogOptiondegree() {

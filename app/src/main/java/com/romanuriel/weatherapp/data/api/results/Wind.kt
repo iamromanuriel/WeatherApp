@@ -1,4 +1,4 @@
-package com.romanuriel.weatherapp.data.model
+package com.romanuriel.weatherapp.data.api.results
 
 data class Wind(
     val deg: Int,

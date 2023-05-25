@@ -2,13 +2,13 @@ package com.romanuriel.weatherapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.romanuriel.weatherapp.data.model.WeatherResponse
+import android.view.View
+import com.romanuriel.weatherapp.data.api.results.WeatherResponse
 import com.romanuriel.weatherapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(),WeatherContract.View {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,15 +21,12 @@ class MainActivity : AppCompatActivity(),WeatherContract.View {
         super.onResume()
     }
 
-    override fun showWeather(weatherResponse: WeatherResponse) {
-        /*
-        val temp = weatherResponse.main.temp - 273.15
-        binding.tvMessage.text = temp.toString()
-        binding.txtDete.text = weatherResponse.base
-        binding.txtNameCity.text = weatherResponse.name
-
-         */
-
+    fun showProgressBar(value: Boolean){
+        if(value){
+            binding.loadingIndicator.visibility = View.VISIBLE
+        }else{
+            binding.loadingIndicator.visibility = View.INVISIBLE
+        }
     }
 
 

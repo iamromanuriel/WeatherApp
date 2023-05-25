@@ -1,21 +1,23 @@
 package com.romanuriel.weatherapp.ui
 
 import com.romanuriel.weatherapp.data.api.ApiService
-import com.romanuriel.weatherapp.data.model.WeatherResponse
+import com.romanuriel.weatherapp.data.api.results.WeatherResponse
+import com.romanuriel.weatherapp.data.repository.IRepositoryMain
+import com.romanuriel.weatherapp.data.repository.RepositoryMain
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
 
-class WeatherModel(val apiService: ApiService):WeatherContract.Model {
+class WeatherModel(private val repositoryMain: IRepositoryMain) : WeatherContract.Model {
 
     private val  publishSubjectType = PublishSubject.create<Double>()
 
-
-
     override fun getWeatherResponse(): Observable<WeatherResponse> {
-        return apiService.getWeatherResponse()
+        return repositoryMain.getWeatherResponse()
+    }
+
+    override fun getWeatherResponseWithSingle(): Single<WeatherResponse> {
+        return repositoryMain.getWeatherResponseWithSingle()
     }
 
     override fun setSelectDegrees(type: Double) {

@@ -1,6 +1,8 @@
 package com.romanuriel.weatherapp.ui
 
 import com.romanuriel.weatherapp.data.api.ApiService
+import com.romanuriel.weatherapp.data.repository.IRepositoryMain
+import com.romanuriel.weatherapp.data.repository.RepositoryMain
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,9 +19,9 @@ class WeatherModule {
     @FragmentScoped
     @Provides
     fun provedesWeatherModel(
-        apiService: ApiService
+        repositoryMain: IRepositoryMain
     ): WeatherContract.Model{
-        return WeatherModel(apiService)
+        return WeatherModel(repositoryMain)
     }
     @FragmentScoped
     @Provides
