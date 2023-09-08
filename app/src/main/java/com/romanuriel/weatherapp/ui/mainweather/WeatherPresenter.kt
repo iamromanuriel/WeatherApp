@@ -1,5 +1,6 @@
-package com.romanuriel.weatherapp.ui
+package com.romanuriel.weatherapp.ui.mainweather
 
+import android.annotation.SuppressLint
 import android.util.Log
 import com.romanuriel.weatherapp.data.api.results.WeatherResponse
 import io.reactivex.Observer
@@ -7,9 +8,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.PublishSubject
 
-class WeatherPresenter(val model: WeatherContract.Model): WeatherContract.Presenter{
+class WeatherPresenter(val model: WeatherContract.Model): WeatherContract.Presenter {
 
     var view: WeatherContract.View? = null
     val disposable =  CompositeDisposable() // referencia a una operacion de subcripcion (cancelar o liberar recursos)
@@ -21,6 +21,31 @@ class WeatherPresenter(val model: WeatherContract.Model): WeatherContract.Presen
     override fun onViewDetach() {
         view = null
         disposable.clear()
+    }
+
+
+    @SuppressLint("CheckResult")
+    override fun onStart() {
+        disposable.add(
+            model.getDate().
+            subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doFinally { view?.showProgressBar(false) }
+                .subscribe({
+                           view?.showDate(it.toString())
+                    model.getWeatherResponse()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doFinally { view?.showProgressBar(false) }
+                        .subscribe({
+                                   view?.showWeather(it)
+                        },{
+                            view?.showMessage(it.localizedMessage?:"")
+                        })
+                },{
+                    view?.showMessage(it.localizedMessage?:"")
+                })
+        )
     }
 
     override fun getWeather() {//With Observarble
@@ -37,6 +62,9 @@ class WeatherPresenter(val model: WeatherContract.Model): WeatherContract.Presen
                 })
         )
     }
+
+
+
 
     override fun getWeatherWithObserver() {
         val observable = model.getWeatherResponse()
@@ -78,7 +106,7 @@ class WeatherPresenter(val model: WeatherContract.Model): WeatherContract.Presen
                 .doOnSubscribe { view?.showProgressBar(true) }
                 .doFinally { view?.showProgressBar(false) }
                 .subscribe({weatherResponse ->
-                    Log.d("TAG","Desde single")
+
                     view?.showWeather(weatherResponse)
                 },{error ->
                     view?.showMessage(error.localizedMessage?: "Error no controlado")
@@ -86,7 +114,20 @@ class WeatherPresenter(val model: WeatherContract.Model): WeatherContract.Presen
         )
     }
 
-
+    override fun getDate() {
+        disposable.add(
+            model.getDate()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { view?.showProgressBar(true) }
+                .doFinally { view?.showProgressBar(false) }
+                .subscribe({
+                           view?.showDate(it.toString())
+                },{
+                    view?.showMessage(it.localizedMessage?:"")
+                })
+        )
+    }
 
 
     override fun getOptionDegrees(type: Double) {

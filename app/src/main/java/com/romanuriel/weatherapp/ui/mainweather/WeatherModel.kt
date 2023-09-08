@@ -1,12 +1,11 @@
-package com.romanuriel.weatherapp.ui
+package com.romanuriel.weatherapp.ui.mainweather
 
-import com.romanuriel.weatherapp.data.api.ApiService
 import com.romanuriel.weatherapp.data.api.results.WeatherResponse
 import com.romanuriel.weatherapp.data.repository.IRepositoryMain
-import com.romanuriel.weatherapp.data.repository.RepositoryMain
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
+import java.util.Date
 
 class WeatherModel(private val repositoryMain: IRepositoryMain) : WeatherContract.Model {
 
@@ -26,5 +25,9 @@ class WeatherModel(private val repositoryMain: IRepositoryMain) : WeatherContrac
 
     override fun  getSelectDegrees(): PublishSubject<Double> {
         return publishSubjectType
+    }
+
+    override fun getDate(): Observable<Date> {
+       return repositoryMain.getDate()
     }
 }

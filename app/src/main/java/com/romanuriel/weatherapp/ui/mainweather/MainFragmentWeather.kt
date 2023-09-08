@@ -8,14 +8,11 @@ import com.romanuriel.weatherapp.R
 import com.romanuriel.weatherapp.data.api.results.WeatherResponse
 import com.romanuriel.weatherapp.databinding.FragmentMainWeatherBinding
 import com.romanuriel.weatherapp.ui.BaseFragmentBinding
-import com.romanuriel.weatherapp.ui.WeatherContract
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainFragmentWeather: BaseFragmentBinding<FragmentMainWeatherBinding>(),WeatherContract.View {
+class MainFragmentWeather: BaseFragmentBinding<FragmentMainWeatherBinding>(), WeatherContract.View {
     @Inject
     lateinit var presenter: WeatherContract.Presenter
 
@@ -26,10 +23,7 @@ class MainFragmentWeather: BaseFragmentBinding<FragmentMainWeatherBinding>(),Wea
 
     override fun initComponent(view: View, savedInstanceState: Bundle?) {
         presenter.onViewAttached(this)
-        //weatherPresenter.getWeather()
-        //weatherPresenter.getWeatherWithObserver()
-        presenter.getWeatherWithSingle()
-        showDialogOptiondegree()
+        presenter.onStart()
     }
 
     override fun onDestroy() {
@@ -39,14 +33,11 @@ class MainFragmentWeather: BaseFragmentBinding<FragmentMainWeatherBinding>(),Wea
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun showWeather(weatherResponse: WeatherResponse) {
-        val datetime = LocalDateTime.now()
-            .format(DateTimeFormatter.ofPattern("E, MMM dd yyyy"))
 
         val temp = weatherResponse.main.temp - 273.15
         val tempMin = weatherResponse.main.temp_min - 273.15
         val tempMax = weatherResponse.main.temp_max - 273.15
         binding.tvMessage.text = temp.toString()
-        binding.txtDete.text = datetime
         binding.txtNameCity.text = weatherResponse.name
         binding.txtTxmpMin.text = tempMin.toString()
         binding.txtTxmpMax.text = tempMax.toString()
@@ -62,16 +53,17 @@ class MainFragmentWeather: BaseFragmentBinding<FragmentMainWeatherBinding>(),Wea
     }
 
     override fun showProgressBar(value: Boolean) {
-        showComponentProgressBar(value)
+        if(value){binding.loading.visibility = View.VISIBLE}
+        else{ binding.loading.visibility = View.GONE}
     }
 
     override fun showMessage(msg: Any) {
         showMessageWithToast(msg)
     }
 
-    private fun showDialogOptiondegree() {
-        binding.buttonSelectDegrees.setOnClickListener {
-            DialogFragmentOptionDegrees().show(childFragmentManager, DialogFragmentOptionDegrees::class.java.simpleName)
-        }
+    override fun showDate(date: String) {
+        binding.txtDete.text = date
     }
+
+
 }

@@ -59,13 +59,7 @@ class DialogFragmentOptionDegrees: DialogFragment(), DialogInterface.OnShowListe
     }
 
     private fun selectOptionDegrees(){
-        b.buttonDegressCelsius.setOnClickListener {
-            type = KELVIN
-        }
 
-        b.buttonDegressFahrenheit.setOnClickListener {
-            type = FARENHEITE
-        }
     }
 
 }
